@@ -7,7 +7,7 @@ namespace SitecoreWarriorsAudit
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             // Load configuration
             var configuration = new ConfigurationBuilder()
@@ -130,19 +130,19 @@ namespace SitecoreWarriorsAudit
                         ConfigCompare.Run(configuration, sitecoreVersion);
                         break;
                     case "2":
-                        ContentAudit.Run(configuration, sitecoreVersion);
+                        await ContentAudit.Run(configuration, sitecoreVersion);
                         break;
                     case "3":
-                        LayoutAudit.Run(configuration, sitecoreVersion);
+                        await LayoutAudit.Run(configuration, sitecoreVersion);
                         break;
                     case "4":
-                        MediaAudit.Run(configuration, sitecoreVersion);
+                        await MediaAudit.Run(configuration, sitecoreVersion);
                         break;
                     case "5":
-                        SecurityAudit.Run(configuration, sitecoreVersion);
+                        await SecurityAudit.Run(configuration, sitecoreVersion);
                         break;
                     case "6":
-                        CreateAuditReport.Run(configuration);
+                        await CreateAuditReport.Run(configuration);
                         break;
                     case "7":
                         Console.WriteLine("Exiting the program. Goodbye!");

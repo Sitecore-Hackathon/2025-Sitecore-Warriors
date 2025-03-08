@@ -78,14 +78,17 @@ namespace SitecoreWarriorsAudit
             string token = "{Tables}";
             foreach (var table in dataTables)
             {
-                string tableName = table.TableName;
-                if (tableName == "SitecoreVersion")
+                if (table.Rows.Count > 0)
                 {
-                    template = template.Replace("{SitecoreVersion}", table.Rows[0]["Sitecore"].ToString());
-                }
-                else if (tableName != "SitecoreVersion")
-                {
-                    stringBuilder.Append(ConvertDataTableToHtml(table));
+                    string tableName = table.Rows[0]["ThisTable"].ToString();
+                    if (tableName == "SitecoreVersion")
+                    {
+                        template = template.Replace("{SitecoreVersion}", table.Rows[0]["Sitecore"].ToString());
+                    }
+                    else if (tableName != "SitecoreVersion")
+                    {
+                        stringBuilder.Append(ConvertDataTableToHtml(table));
+                    }
                 }
             }
 
@@ -99,7 +102,7 @@ namespace SitecoreWarriorsAudit
             StringWriter sw = new StringWriter();
 
             sw.WriteLine("\n\n");
-            sw.WriteLine($"<h2>{table.TableName}</h2>");
+            sw.WriteLine($"<h2>{table.Rows[0]["ThisTable"].ToString()}</h2>");
             sw.WriteLine("\n\n");
 
 
@@ -109,7 +112,10 @@ namespace SitecoreWarriorsAudit
             sw.WriteLine("<tr>");
             foreach (DataColumn column in table.Columns)
             {
-                sw.WriteLine($"<th>{column.ColumnName}</th>");
+                if (column.ColumnName != "ThisTable")
+                {
+                    sw.WriteLine($"<th>{column.ColumnName}</th>");
+                }
             }
             sw.WriteLine("</tr>");
 
@@ -119,7 +125,10 @@ namespace SitecoreWarriorsAudit
                 sw.WriteLine("<tr>");
                 foreach (DataColumn column in table.Columns)
                 {
-                    sw.WriteLine($"<td>{row[column]}</td>");
+                    if (column.ColumnName != "ThisTable")
+                    {
+                        sw.WriteLine($"<td>{row[column]}</td>");
+                    }
                 }
                 sw.WriteLine("</tr>");
             }
