@@ -17,6 +17,7 @@ Many Sitecore clients are using outdated versions of Sitecore and are unsure whe
 - Sitecore PowerShell version 7 installed
 - On-prem Sitecore installation
 - Access to the `App_Config` folder of the Sitecore application
+- Access to Sitecore CM Environment
 - A SQL Server to host the audit report database
 - .NET 8.0 SDK installed
 
