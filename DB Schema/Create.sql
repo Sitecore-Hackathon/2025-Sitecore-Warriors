@@ -1,53 +1,4 @@
-/****** Object:  Database [audit]    Script Date: 3/8/2025 2:23:14 PM ******/
-CREATE DATABASE [audit]  (EDITION = 'GeneralPurpose', SERVICE_OBJECTIVE = 'GP_S_Gen5_1', MAXSIZE = 32 GB) WITH CATALOG_COLLATION = SQL_Latin1_General_CP1_CI_AS, LEDGER = OFF;
-GO
-ALTER DATABASE [audit] SET COMPATIBILITY_LEVEL = 160
-GO
-ALTER DATABASE [audit] SET ANSI_NULL_DEFAULT OFF 
-GO
-ALTER DATABASE [audit] SET ANSI_NULLS OFF 
-GO
-ALTER DATABASE [audit] SET ANSI_PADDING OFF 
-GO
-ALTER DATABASE [audit] SET ANSI_WARNINGS OFF 
-GO
-ALTER DATABASE [audit] SET ARITHABORT OFF 
-GO
-ALTER DATABASE [audit] SET AUTO_SHRINK OFF 
-GO
-ALTER DATABASE [audit] SET AUTO_UPDATE_STATISTICS ON 
-GO
-ALTER DATABASE [audit] SET CURSOR_CLOSE_ON_COMMIT OFF 
-GO
-ALTER DATABASE [audit] SET CONCAT_NULL_YIELDS_NULL OFF 
-GO
-ALTER DATABASE [audit] SET NUMERIC_ROUNDABORT OFF 
-GO
-ALTER DATABASE [audit] SET QUOTED_IDENTIFIER OFF 
-GO
-ALTER DATABASE [audit] SET RECURSIVE_TRIGGERS OFF 
-GO
-ALTER DATABASE [audit] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
-GO
-ALTER DATABASE [audit] SET ALLOW_SNAPSHOT_ISOLATION ON 
-GO
-ALTER DATABASE [audit] SET PARAMETERIZATION SIMPLE 
-GO
-ALTER DATABASE [audit] SET READ_COMMITTED_SNAPSHOT ON 
-GO
-ALTER DATABASE [audit] SET  MULTI_USER 
-GO
-ALTER DATABASE [audit] SET ENCRYPTION ON
-GO
-ALTER DATABASE [audit] SET QUERY_STORE = ON
-GO
-ALTER DATABASE [audit] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 30), DATA_FLUSH_INTERVAL_SECONDS = 900, INTERVAL_LENGTH_MINUTES = 60, MAX_STORAGE_SIZE_MB = 100, QUERY_CAPTURE_MODE = AUTO, SIZE_BASED_CLEANUP_MODE = AUTO, MAX_PLANS_PER_QUERY = 200, WAIT_STATS_CAPTURE_MODE = ON)
-GO
-/*** The scripts of database scoped configurations in Azure should be executed inside the target database connection. ***/
-GO
--- ALTER DATABASE SCOPED CONFIGURATION SET MAXDOP = 8;
-GO
-/****** Object:  Table [dbo].[MediaItems]    Script Date: 3/8/2025 2:23:14 PM ******/
+/****** Object:  Table [dbo].[MediaItems]    Script Date: 3/8/2025 12:25:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -62,7 +13,7 @@ CREATE TABLE [dbo].[MediaItems](
 	[InUse] [varchar](50) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SitecoreBrokenLinks]    Script Date: 3/8/2025 2:23:14 PM ******/
+/****** Object:  Table [dbo].[SitecoreBrokenLinks]    Script Date: 3/8/2025 12:25:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -76,7 +27,7 @@ PRIMARY KEY CLUSTERED
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SitecoreConfigComparison]    Script Date: 3/8/2025 2:23:14 PM ******/
+/****** Object:  Table [dbo].[SitecoreConfigComparison]    Script Date: 3/8/2025 12:25:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -93,7 +44,7 @@ PRIMARY KEY CLUSTERED
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SitecoreLanguages]    Script Date: 3/8/2025 2:23:14 PM ******/
+/****** Object:  Table [dbo].[SitecoreLanguages]    Script Date: 3/8/2025 12:25:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -108,7 +59,7 @@ PRIMARY KEY CLUSTERED
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SitecoreLayouts]    Script Date: 3/8/2025 2:23:14 PM ******/
+/****** Object:  Table [dbo].[SitecoreLayouts]    Script Date: 3/8/2025 12:25:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -123,7 +74,7 @@ PRIMARY KEY CLUSTERED
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SitecoreMediaItems]    Script Date: 3/8/2025 2:23:14 PM ******/
+/****** Object:  Table [dbo].[SitecoreMediaItems]    Script Date: 3/8/2025 12:25:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -138,7 +89,7 @@ CREATE TABLE [dbo].[SitecoreMediaItems](
 	[InUse] [varchar](50) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SitecoreModules]    Script Date: 3/8/2025 2:23:14 PM ******/
+/****** Object:  Table [dbo].[SitecoreModules]    Script Date: 3/8/2025 12:25:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -154,7 +105,7 @@ PRIMARY KEY CLUSTERED
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SitecoreRenderings]    Script Date: 3/8/2025 2:23:14 PM ******/
+/****** Object:  Table [dbo].[SitecoreRenderings]    Script Date: 3/8/2025 12:25:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -170,7 +121,7 @@ PRIMARY KEY CLUSTERED
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SitecoreRoles]    Script Date: 3/8/2025 2:23:14 PM ******/
+/****** Object:  Table [dbo].[SitecoreRoles]    Script Date: 3/8/2025 12:25:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -180,7 +131,7 @@ CREATE TABLE [dbo].[SitecoreRoles](
 	[Domain] [nvarchar](255) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SitecoreSites]    Script Date: 3/8/2025 2:23:14 PM ******/
+/****** Object:  Table [dbo].[SitecoreSites]    Script Date: 3/8/2025 12:25:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -194,7 +145,7 @@ PRIMARY KEY CLUSTERED
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SitecoreTemplates]    Script Date: 3/8/2025 2:23:14 PM ******/
+/****** Object:  Table [dbo].[SitecoreTemplates]    Script Date: 3/8/2025 12:25:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -209,7 +160,7 @@ PRIMARY KEY CLUSTERED
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SitecoreUsers]    Script Date: 3/8/2025 2:23:14 PM ******/
+/****** Object:  Table [dbo].[SitecoreUsers]    Script Date: 3/8/2025 12:25:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -221,7 +172,7 @@ CREATE TABLE [dbo].[SitecoreUsers](
 	[IsEnabled] [bit] NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SitecoreVersion]    Script Date: 3/8/2025 2:23:14 PM ******/
+/****** Object:  Table [dbo].[SitecoreVersion]    Script Date: 3/8/2025 12:25:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -239,7 +190,7 @@ PRIMARY KEY CLUSTERED
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UnUsedMediaItems]    Script Date: 3/8/2025 2:23:14 PM ******/
+/****** Object:  Table [dbo].[UnUsedMediaItems]    Script Date: 3/8/2025 12:25:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -253,7 +204,7 @@ CREATE TABLE [dbo].[UnUsedMediaItems](
 	[Size] [varchar](50) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  StoredProcedure [dbo].[Usp_GenerateAuditReport]    Script Date: 3/8/2025 2:23:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[Usp_GenerateAuditReport]    Script Date: 3/8/2025 12:25:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -280,7 +231,10 @@ BEGIN
 	SELECT 'Languages' AS ThisTable, [Name], [CultureInfo] [Culture Info] FROM [dbo].[SitecoreLanguages]
 
 	/****** Script for SelectTopNRows command from SSMS  ******/
-	SELECT 'Users' AS ThisTable, [Name], [Domain], [IsAdministrator], [IsEnabled] FROM [dbo].[SitecoreUsers]
+	SELECT 'Users' AS ThisTable, 'Number of Users' 'Number of Users', Count([Name]) [Count] FROM [dbo].[SitecoreUsers] UNION
+	SELECT 'Users' AS ThisTable, 'Number of Admin Users' 'Number of Admin Users', Count([Name]) [Count] FROM [dbo].[SitecoreUsers] WHERE [IsAdministrator] = 1 UNION
+	SELECT 'Users' AS ThisTable, 'Number of Disabled Users' 'Number of Disabled Users', Count([Name]) [Count] FROM [dbo].[SitecoreUsers] SU WHERE [IsEnabled] = 0 UNION
+	SELECT 'Users' AS ThisTable, [Domain] 'Users by Domain', Count([Name]) [Count] FROM [dbo].[SitecoreUsers] SU GROUP BY SU.Domain Order By ThisTable DESC
 
 	/****** Script for SitecoreRoles command from SSMS  ******/
 	SELECT 'Roles' AS ThisTable, [Name], [Domain] FROM [dbo].[SitecoreRoles]
@@ -300,141 +254,14 @@ BEGIN
 
 	/****** Script for SelectTopNRows command from SSMS  ******/
 	SELECT 'UnUsed Media Items' AS ThisTable, [Name], [ID], [ItemPath] [Item Path], [TemplateName] [Template Name], [Extension], [Size] FROM [dbo].[UnUsedMediaItems]
+	
+	--Select count(*) from [SitecoreConfigComparison] where [ModifiedInDestination] = 1
+	-- select [Filename] from [SitecoreConfigComparison] where [ModifiedInDestination] = 1
+	-- Select count(*) as UnsedMediaCount from SitecoreMediaItems where InUse = 'False'
+	-- Select top 10 Name,Size as UnsedMediaCount from SitecoreMediaItems order by Size desc
 
-	SELECT 'Config Comparison' AS ThisTable, [Filename] [File Name], [AvailableInSource] [Available in Source], [AvailableInDestination] [Available in Destination], [ModifiedInDestination] [Modified in Destination] FROM [dbo].[SitecoreConfigComparison]
-
-END
-GO
-/****** Object:  StoredProcedure [dbo].[Usp_GetSitecoreBrokenLinks]    Script Date: 3/8/2025 2:23:14 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
--- =============================================
--- Author:      <Author, , Name>
--- Create Date: <Create Date, , >
--- Description: <Description, , >
--- =============================================
-CREATE PROCEDURE [dbo].[Usp_GetSitecoreBrokenLinks]
-AS
-BEGIN
-    -- SET NOCOUNT ON added to prevent extra result sets from
-    -- interfering with SELECT statements.
-    SET NOCOUNT ON
-
-    -- Insert statements for procedure here
-    /****** Script for SelectTopNRows command from SSMS  ******/
-	SELECT [ItemId] FROM [dbo].[SitecoreBrokenLinks]
+	SELECT 'Config Comparison' AS ThisTable, [Filename] [File Name], [AvailableInSource] [Available in Source], 
+	[AvailableInDestination] [Available in Destination], [ModifiedInDestination] [Modified in Destination] FROM [dbo].[SitecoreConfigComparison] Where [ModifiedInDestination] = 1
 
 END
-GO
-/****** Object:  StoredProcedure [dbo].[Usp_GetSitecoreConfigComparison]    Script Date: 3/8/2025 2:23:14 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
--- =============================================
--- Author:      <Author, , Name>
--- Create Date: <Create Date, , >
--- Description: <Description, , >
--- =============================================
-CREATE PROCEDURE [dbo].[Usp_GetSitecoreConfigComparison]
-AS
-BEGIN
-    -- SET NOCOUNT ON added to prevent extra result sets from
-    -- interfering with SELECT statements.
-    SET NOCOUNT ON
-
-    -- Insert statements for procedure here
-    /****** Script for SelectTopNRows command from SSMS  ******/
-	SELECT [Filename], [AvailableInSource]
-      ,[AvailableInDestination]
-      ,[ModifiedInDestination]
-	FROM [dbo].[SitecoreConfigComparison]
-
-END
-GO
-/****** Object:  StoredProcedure [dbo].[Usp_GetSitecoreLayouts]    Script Date: 3/8/2025 2:23:14 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
--- =============================================
--- Author:      <Author, , Name>
--- Create Date: <Create Date, , >
--- Description: <Description, , >
--- =============================================
-CREATE PROCEDURE [dbo].[Usp_GetSitecoreLayouts]
-AS
-BEGIN
-    -- SET NOCOUNT ON added to prevent extra result sets from
-    -- interfering with SELECT statements.
-    SET NOCOUNT ON
-
-    -- Insert statements for procedure here
-    /****** Script for SelectTopNRows command from SSMS  ******/
-
-	SELECT [Name], [ItemId] FROM [dbo].[SitecoreLayouts]
-
-END
-GO
-/****** Object:  StoredProcedure [dbo].[Usp_GetSitecoreMediaItems]    Script Date: 3/8/2025 2:23:14 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
--- =============================================
--- Author:      <Author, , Name>
--- Create Date: <Create Date, , >
--- Description: <Description, , >
--- =============================================
-CREATE PROCEDURE [dbo].[Usp_GetSitecoreMediaItems]
-AS
-BEGIN
-    -- SET NOCOUNT ON added to prevent extra result sets from
-    -- interfering with SELECT statements.
-    SET NOCOUNT ON
-
-    -- Insert statements for procedure here
-    /****** Script for SelectTopNRows command from SSMS  ******/
-
-	SELECT [Name]
-      ,[ID]
-      ,[ItemPath]
-      ,[TemplateName]
-      ,[Extension]
-      ,[Size]
-      ,[InUse]
-  FROM [dbo].[SitecoreMediaItems]
-
-END
-GO
-/****** Object:  StoredProcedure [dbo].[Usp_GetSitecoreModules]    Script Date: 3/8/2025 2:23:14 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
--- =============================================
--- Author:      <Author, , Name>
--- Create Date: <Create Date, , >
--- Description: <Description, , >
--- =============================================
-CREATE PROCEDURE [dbo].[Usp_GetSitecoreModules]
-AS
-BEGIN
-    -- SET NOCOUNT ON added to prevent extra result sets from
-    -- interfering with SELECT statements.
-    SET NOCOUNT ON
-
-    -- Insert statements for procedure here
-    /****** Script for SelectTopNRows command from SSMS  ******/
-
-	SELECT [Name]
-      ,[ModuleType]
-      ,[Version]
-  FROM [dbo].[SitecoreModules]
-
-END
-GO
-ALTER DATABASE [audit] SET  READ_WRITE 
 GO
