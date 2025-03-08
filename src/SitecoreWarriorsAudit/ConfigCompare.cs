@@ -10,7 +10,7 @@ namespace SitecoreWarriorsAudit
 {
     public static class ConfigCompare
     {
-        public static void Run(IConfiguration configuration)
+        public static void Run(IConfiguration configuration, SitecoreVersion sitecoreVersion)
         {
             Console.WriteLine($"\n************Config Compare selected************\n");
 
@@ -19,53 +19,19 @@ namespace SitecoreWarriorsAudit
             string xmlPath = Path.Combine(basePath, "ConfigComparison", "sitecore_folders.xml");
             XDocument xmlDoc = XDocument.Load(xmlPath);
 
-            // Get available versions
-            var versions = xmlDoc.Descendants("Folder")
-                                 .Select(x => x.Element("Version").Value)
-                                 .Distinct()
-                                 .OrderBy(v => Version.Parse(v))
-                                 .ToList();
-
             // Prompt for version
-            string version = GetValidUserInput("version", versions);
-
-            // Get available revisions for the selected version
-            var revisions = xmlDoc.Descendants("Folder")
-                                  .Where(x => x.Element("Version").Value == version)
-                                  .Select(x => x.Element("Revision").Value)
-                                  .Distinct()
-                                  .ToList();
+            string version = sitecoreVersion.Version;
 
             // Prompt for revision
-            string revision = GetValidUserInput("revision", revisions);
-
-            // Get available types for the selected version and revision
-            var types = xmlDoc.Descendants("Folder")
-                              .Where(x => x.Element("Version").Value == version && x.Element("Revision").Value == revision)
-                              .Select(x => x.Element("Type").Value)
-                              .Distinct()
-                              .ToList();
+            string revision = sitecoreVersion.Revision;
 
             // Prompt for type
-            string type = types.Contains("") ? "" : GetValidUserInput("type", types);
-
-            // Get available roles for the selected version, revision, and type
-            var roles = xmlDoc.Descendants("Folder")
-                              .Where(x => x.Element("Version").Value == version && x.Element("Revision").Value == revision && x.Element("Type").Value == type)
-                              .Select(x => x.Element("Role").Value)
-                              .Distinct()
-                              .ToList();
+            string type = sitecoreVersion.Type;
 
             // Prompt for role
-            string role = roles.Contains("") ? "" : GetValidUserInput("role", roles);
+            string role = sitecoreVersion.Role;
 
-            // Get the folder name based on the selected options
-            var folderName = xmlDoc.Descendants("Folder")
-                                   .Where(x => x.Element("Version").Value == version && x.Element("Revision").Value == revision && x.Element("Type").Value == type && x.Element("Role").Value == role)
-                                   .Select(x => x.Element("FolderName").Value)
-                                   .FirstOrDefault();
-
-            Console.WriteLine($"Selected Sitecore Version: {folderName}");
+            string folderName = sitecoreVersion.Sitecore;
 
             // Ask for the Sitecore App_Config folder path
             string appConfigPath;
@@ -104,24 +70,6 @@ namespace SitecoreWarriorsAudit
 
             // Display the comparison results
             Console.WriteLine("\nComparison Report has been inserted in Database. \n\n");
-        }
-
-
-        static string GetValidUserInput(string property, List<string> options)
-        {
-            string input = null;
-            while (input == null || !options.Contains(input))
-            {
-                Console.WriteLine($"Select {property}:");
-                options.ForEach(Console.WriteLine);
-                Console.Write($"\nChoose the {property}: ");
-                input = Console.ReadLine();
-                if (!options.Contains(input))
-                {
-                    Console.WriteLine($"\nxxxx Invalid {property}. Please select a valid {property}.\n");
-                }
-            }
-            return input;
         }
 
         static List<(string Filename, bool AvailableInSource, bool AvailableInDestination, bool ModifiedInDestination)> CompareConfigFiles(string folder1, string folder2)
@@ -172,7 +120,7 @@ namespace SitecoreWarriorsAudit
                 connection.Open();
 
                 // Truncate the table first
-                string truncateQuery = "TRUNCATE TABLE ConfigComparison";
+                string truncateQuery = "TRUNCATE TABLE SitecoreConfigComparison";
                 using (SqlCommand truncateCommand = new SqlCommand(truncateQuery, connection))
                 {
                     truncateCommand.ExecuteNonQuery();
@@ -180,7 +128,7 @@ namespace SitecoreWarriorsAudit
 
                 foreach (var item in report)
                 {
-                    string query = "INSERT INTO ConfigComparison (Filename, AvailableInSource, AvailableInDestination, ModifiedInDestination) VALUES (@Filename, @AvailableInSource, @AvailableInDestination, @ModifiedInDestination)";
+                    string query = "INSERT INTO SitecoreConfigComparison (Filename, AvailableInSource, AvailableInDestination, ModifiedInDestination) VALUES (@Filename, @AvailableInSource, @AvailableInDestination, @ModifiedInDestination)";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
