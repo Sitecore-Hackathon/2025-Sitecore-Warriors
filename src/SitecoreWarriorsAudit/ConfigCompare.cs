@@ -33,6 +33,16 @@ namespace SitecoreWarriorsAudit
 
             string folderName = sitecoreVersion.Sitecore;
 
+            // Find the folder in \ConfigComparison\Configuration
+            string configFolderPath = $"{basePath}ConfigComparison\\Configuration\\{folderName}\\App_Config";
+
+            // Check if the folder exists
+            if (!Directory.Exists(configFolderPath))
+            {
+                Console.WriteLine("The specified Sitecore Vanilla App_Config folder does not exist.");
+                return;
+            }
+
             // Ask for the Sitecore App_Config folder path
             string appConfigPath;
             do
@@ -51,16 +61,6 @@ namespace SitecoreWarriorsAudit
                     Console.WriteLine("No, the folder does not exist or the folder is not App_Config. Please enter a valid path.");
                 }
             } while (!Directory.Exists(appConfigPath) || !Path.GetFileName(appConfigPath).Equals("App_Config", StringComparison.OrdinalIgnoreCase));
-
-            // Find the folder in \ConfigComparison\Configuration
-            string configFolderPath = Path.Combine(basePath, "ConfigComparison", "Configuration", folderName, "App_Config");
-
-            // Check if the folder exists
-            if (!Directory.Exists(configFolderPath))
-            {
-                Console.WriteLine("The specified configuration folder does not exist.");
-                return;
-            }
 
             // Compare the App_Config folders and generate the report
             var comparisonResults = CompareConfigFiles(appConfigPath, configFolderPath);
