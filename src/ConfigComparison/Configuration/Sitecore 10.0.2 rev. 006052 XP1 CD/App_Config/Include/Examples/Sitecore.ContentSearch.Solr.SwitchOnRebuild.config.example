@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/" xmlns:role="http://www.sitecore.net/xmlconfig/role/" xmlns:search="http://www.sitecore.net/xmlconfig/search/">
+  <sitecore role:require="Standalone or ContentManagement" search:require="Solr">
+    <contentSearch>
+      <configuration type="Sitecore.ContentSearch.ContentSearchConfiguration, Sitecore.ContentSearch">
+        <indexes hint="list:AddIndex">
+
+          <!-- MASTER INDEX configuration -->
+          <!-- Replaces the default SolrSearchIndex type with the SwitchOnRebuildSolrSearchIndex that adds the capability of maintaining two cores for a particular index.
+               A SwitchOnRebuild index expects 1 more parameter to be passed to the constructor:
+                  rebuildcore:        The name for the rebuild index operations. 
+          -->
+          <index id="sitecore_master_index">
+            <patch:attribute name="type" value="Sitecore.ContentSearch.SolrProvider.SwitchOnRebuildSolrSearchIndex, Sitecore.ContentSearch.SolrProvider" />
+            <param patch:after="*[@desc='core']" desc="rebuildcore">$(id)_rebuild</param>
+          </index>
+
+          <!-- WEB INDEX configuration -->
+          <!-- Replaces the default SolrSearchIndex type with the SwitchOnRebuildSolrSearchIndex that adds the capability of maintaining two cores for a particular index.
+               A SwitchOnRebuild index expects 1 more parameter to be passed to the constructor:
+                  rebuildcore:        The name for the rebuild index operations.
+          -->
+          <index id="sitecore_web_index">
+            <patch:attribute name="type" value="Sitecore.ContentSearch.SolrProvider.SwitchOnRebuildSolrSearchIndex, Sitecore.ContentSearch.SolrProvider" />
+            <param patch:after="*[@desc='core']" desc="rebuildcore">$(id)_rebuild</param>
+          </index>
+
+          <!-- CORE INDEX configuration -->
+          <!-- Replaces the default SolrSearchIndex type with the SwitchOnRebuildSolrSearchIndex that adds the capability of maintaining two cores for a particular index.
+               A SwitchOnRebuild index expects 1 more parameter to be passed to the constructor:
+                  rebuildcore:        The name for the rebuild index operations.
+          -->
+          <index id="sitecore_core_index">
+            <patch:attribute name="type" value="Sitecore.ContentSearch.SolrProvider.SwitchOnRebuildSolrSearchIndex, Sitecore.ContentSearch.SolrProvider" />
+            <param patch:after="*[@desc='core']" desc="rebuildcore">$(id)_rebuild</param>
+          </index>
+        </indexes>
+
+      </configuration>
+    </contentSearch>
+  </sitecore>
+</configuration>

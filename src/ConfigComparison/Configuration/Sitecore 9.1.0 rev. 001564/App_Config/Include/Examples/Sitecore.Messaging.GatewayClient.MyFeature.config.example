@@ -1,0 +1,80 @@
+﻿<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/" xmlns:set="http://www.sitecore.net/xmlconfig/set/" xmlns:role="http://www.sitecore.net/xmlconfig/role/">
+    <sitecore role:require="ContentManagement or ContentDelivery or Standalone">
+        <Messaging>
+
+            <GatewayClient>
+
+                <TransferRetrySettings>
+                    <!-- If you require exponential delivery retries with different parameters, specify new
+                         settings as below. -->
+                    <MyFeature.MyTolerance maxAttempts="20" minBackoff="00:02:00" maxBackoff="00:30:00" deltaBackoff="00:00:01" />
+                </TransferRetrySettings>
+
+                <Rebus>
+
+                    <!-- Gateway Client Buses
+                        
+                         - gatewayServiceHostAddress can either be provided inline, or defined in the standard connection
+                           strings config and substituted in using the following syntax: ${ConnectionStrings:<name>} -->
+                    <MyFeature.MessageBuses.Default
+                        gatewayServiceHostAddress="http://testhost.com" 
+                        webClient="MyFeature.WebClient.Secure" 
+                        transferRetry="MyFeature.MyTolerance">
+
+                        <!-- Gateway client buses must be configured with a 'batch' transport.  Currently InMemoryBatch and SqlServerBatch
+                             are available.  The settings for these are identical to the convential transports. -->
+                        <Transport>
+                            <SqlServerBatch>
+                                <ConnectionStringOrName>messaging</ConnectionStringOrName>
+                                <TableName>MyFeature-MessageQueues-Default</TableName>
+                                <InputQueueName>MyFeature.MessageQueues.Default</InputQueueName>
+                            </SqlServerBatch>
+                        </Transport>
+
+                        <!-- Define which messages will be sent to which queues.-->
+                        <Routing>
+                            <AssemblyMappings>
+                                <Default>
+                                    <Assembly>Sitecore.MyFeature.Messaging.Model</Assembly>
+                                    <DestinationQueue>MyFeature.MessageQueues.Default</DestinationQueue>
+                                </Default>
+                            </AssemblyMappings>
+                        </Routing>
+
+                        <Options>
+                            <!-- Set the batch size for the gateway message transfer.  This can depend on the 
+                                 performance of the transport, the size of the messages and the throughput of messages. -->
+                            <GatewayClient>
+                                <ExportBatchSize>10</ExportBatchSize>
+                            </GatewayClient>
+
+                        </Options>
+
+                        <!-- Log messages from the Rebus engine will be sent to the Sitecore logs. -->
+                        <Logging Type="Sitecore.Messaging.SitecoreLoggerFactory,Sitecore.Messaging" />
+
+                    </MyFeature.MessageBuses.Default>
+                </Rebus>
+
+                <WebClientRegistry>
+                    <Clients>
+                        <!-- MyFeature provides its own unique certificate to secure communication between the Gateway web client and 
+                             the Gateway Service.  So we define a unique web client specifying the connection string of our certificate.
+                             Otherwise, use an existing web client to minimise the use of sockets on the machine. -->
+                        <MyFeature.WebClient.Secure>
+                            <Type>Sitecore.Messaging.GatewayClient.WebClients.SecureWebClientFactory, Sitecore.Messaging.GatewayClient.Rest</Type>
+                            <Options>
+                                <RequestTimeout>0:00:15</RequestTimeout>
+                                <!-- Connection strings can either be provided inline, or defined in the standard connection
+                                     strings config and substituted in using the following syntax. -->
+                                <CertificateConnectionString>${ConnectionStrings:Sitecore.MyFeature.Messaging.Certificate}</CertificateConnectionString>
+                            </Options>
+                        </MyFeature.WebClient.Secure>
+                    </Clients>
+                </WebClientRegistry>
+
+            </GatewayClient>
+
+        </Messaging>
+    </sitecore>
+</configuration>

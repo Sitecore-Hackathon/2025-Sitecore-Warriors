@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/" xmlns:role="http://www.sitecore.net/xmlconfig/role/" xmlns:search="http://www.sitecore.net/xmlconfig/search/">
+  <sitecore role:require="Standalone or ContentManagement" search:require="Solr">
+    <contentSearch>
+      <configuration type="Sitecore.ContentSearch.ContentSearchConfiguration, Sitecore.ContentSearch">
+        <indexes hint="list:AddIndex">
+          <!-- MASTER INDEX configuration -->
+          <!-- Replaces the default SolrSearchIndex type which uses aliases with a swap command that allows Sitecore to start up even when a Solr connection is not available.
+               Once the Solr connection comes back, the patch restarts the application and initializes the Solr index.
+               A SwitchOnRebuild index expects 4 parameters to be passed to the constructor:
+                  mainalias:          The alias name for the primary index operations. 
+                                      The ContentSearch.Solr.EnforceAliasCreation setting controls whether the alias should be created automatically. 
+                                      It must have only one collection assigned to it.
+                  rebuildalias:       The alias name for the rebuild index operations. 
+                                      The ContentSearch.Solr.EnforceAliasCreation setting controls whether the alias should be created automatically. 
+                                      It must have only one collection assigned to it.
+                  collection:         The primary index collection name.
+                  rebuildcollection:            The rebuild index collection name.
+          -->
+          <index id="sitecore_master_index">
+            <patch:attribute name="type" value="Sitecore.ContentSearch.SolrProvider.SwitchOnRebuildSolrCloudSearchIndex, Sitecore.ContentSearch.SolrProvider" />
+            <param desc="core">
+              <patch:delete />
+            </param>
+            <param desc="rebuildcore">
+              <patch:delete />
+            </param>
+            <param patch:after="*[@desc='name']" desc="mainalias">$(id)MainAlias</param>
+            <param patch:after="*[@desc='mainalias']" desc="rebuildalias">$(id)RebuildAlias</param>
+            <param patch:after="*[@desc='rebuildalias']" desc="collection">$(id)</param>
+            <param patch:after="*[@desc='collection']" desc="rebuildcollection">$(id)_rebuild</param>
+          </index>
+          <!-- WEB INDEX configuration -->
+          <!-- Replaces the default SolrSearchIndex type which uses aliases with a swap command that allows Sitecore to start up even when a Solr connection is not available.
+               Once the Solr connection comes back, the patch restarts the application and initializes the Solr index.
+               A SwitchOnRebuild index expects 4 parameters to be passed to the constructor:
+                  mainalias:          The alias name for the primary index operations. 
+                                      The ContentSearch.Solr.EnforceAliasCreation setting controls whether the alias should be created automatically. 
+                                      It must have only one collection assigned to it.
+                  rebuildalias:       The alias name for the rebuild index operations. 
+                                      The ContentSearch.Solr.EnforceAliasCreation setting controls whether the alias should be created automatically. 
+                                      It must have only one collection assigned to it.
+                  collection:         The primary index collection name.
+                  rebuildcollection:            The rebuild index collection name.
+          -->
+          <index id="sitecore_web_index">
+            <patch:attribute name="type" value="Sitecore.ContentSearch.SolrProvider.SwitchOnRebuildSolrCloudSearchIndex, Sitecore.ContentSearch.SolrProvider" />
+            <param desc="core">
+              <patch:delete />
+            </param>
+            <param desc="rebuildcore">
+              <patch:delete />
+            </param>
+            <param patch:after="*[@desc='name']" desc="mainalias">$(id)MainAlias</param>
+            <param patch:after="*[@desc='mainalias']" desc="rebuildalias">$(id)RebuildAlias</param>
+            <param patch:after="*[@desc='rebuildalias']" desc="collection">$(id)</param>
+            <param patch:after="*[@desc='collection']" desc="rebuildcollection">$(id)_rebuild</param>
+          </index>
+          <!-- CORE INDEX configuration -->
+          <!-- Replaces the default SolrSearchIndex type which uses aliases with a swap command that allows Sitecore to start up even when a Solr connection is not available.
+               Once the Solr connection comes back, the patch restarts the application and initializes the Solr index.
+               A SwitchOnRebuild index expects 4 parameters to be passed to the constructor:
+                  mainalias:          The alias name for the primary index operations. 
+                                      The ContentSearch.Solr.EnforceAliasCreation setting controls whether the alias should be created automatically. 
+                                      It must have only one collection assigned to it.
+                  rebuildalias:       The alias name for the rebuild index operations. 
+                                      The ContentSearch.Solr.EnforceAliasCreation setting controls whether the alias should be created automatically. 
+                                      It must have only one collection assigned to it.
+                  collection:         The primary index collection name.
+                  rebuildcollection:            The rebuild index collection name.
+          -->
+          <index id="sitecore_core_index">
+            <patch:attribute name="type" value="Sitecore.ContentSearch.SolrProvider.SwitchOnRebuildSolrCloudSearchIndex, Sitecore.ContentSearch.SolrProvider" />
+            <param desc="core">
+              <patch:delete />
+            </param>
+            <param desc="rebuildcore">
+              <patch:delete />
+            </param>
+            <param patch:after="*[@desc='name']" desc="mainalias">$(id)MainAlias</param>
+            <param patch:after="*[@desc='mainalias']" desc="rebuildalias">$(id)RebuildAlias</param>
+            <param patch:after="*[@desc='rebuildalias']" desc="collection">$(id)</param>
+            <param patch:after="*[@desc='collection']" desc="rebuildcollection">$(id)_rebuild</param>
+          </index>
+        </indexes>
+      </configuration>
+    </contentSearch>
+    <settings>
+      <!--  ENFORCES ALIAS CREATION ON INDEX INITIALIZATION
+            If enabled, index aliases will be created on Solr during the index initialization process.
+            Default vaue: false
+      -->
+      <setting name="ContentSearch.Solr.EnforceAliasCreation" value="false" />
+    </settings>
+  </sitecore>
+</configuration>

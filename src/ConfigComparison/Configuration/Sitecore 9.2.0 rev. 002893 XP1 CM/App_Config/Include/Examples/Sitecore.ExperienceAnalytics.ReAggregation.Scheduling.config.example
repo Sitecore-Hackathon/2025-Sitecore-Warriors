@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+
+Purpose: This file has features and components that are used to schedule agents to re-aggregate historical data when you create new reporting segment(s).
+
+-->
+<configuration xmlns:role="http://www.sitecore.net/xmlconfig/role/">
+  <sitecore role:require="Standalone or Processing">
+      <hooks>
+          <hook desc="reAggregationLoader" type="Sitecore.ExperienceAnalytics.Core.SubSystemLoader, Sitecore.ExperienceAnalytics.Core" >
+              <param desc="logger" ref="experienceAnalytics/reAggregation/logger" />
+              <param type="Sitecore.Analytics.Core.Subsystem" singleInstance="true">
+                  <BackgroundServices hint="list:Add">
+                      
+                      <reAggregationScheduler type="Sitecore.Analytics.Core.BackgroundService">
+                          <param type="Sitecore.Abstractions.BaseLog, Sitecore.Kernel" resolve="true"/>
+                          <param desc="agentPath">experienceAnalytics/reAggregation/reAggregationAgent</param>
+                          <param type="Sitecore.Analytics.Core.ConfigurationHelper, Sitecore.Analytics.Core" desc="interval" factoryMethod="ToTimeSpan" arg0="0.00:00:30"/>
+                          <param type="Sitecore.Analytics.Core.ConfigurationHelper, Sitecore.Analytics.Core" desc="maxAgents" factoryMethod="ToInt" arg0="1" />
+                      </reAggregationScheduler>
+
+                      <reAggregationCompletionScheduler type="Sitecore.Analytics.Core.BackgroundService">
+                          <param type="Sitecore.Abstractions.BaseLog, Sitecore.Kernel" resolve="true"/>
+                          <param desc="agentPath">experienceAnalytics/reAggregation/reAggregationCompletionAgent</param>
+                          <param type="Sitecore.Analytics.Core.ConfigurationHelper, Sitecore.Analytics.Core" desc="interval" factoryMethod="ToTimeSpan" arg0="0.00:00:30"/>
+                          <param type="Sitecore.Analytics.Core.ConfigurationHelper, Sitecore.Analytics.Core" desc="maxAgents" factoryMethod="ToInt" arg0="1" />
+                      </reAggregationCompletionScheduler>
+                      
+                  </BackgroundServices>
+              </param>
+          </hook>
+      </hooks>
+
+      <experienceAnalytics>
+          <reAggregation>
+              <!-- 
+                The ReAggregationScheduler starts a new re-aggregation task if it finds any segments with the status 'NEW'
+                    Parameters:                     
+                     - 'triggerHour' - specifies that the reaggregation is expected to run only after this time.
+                        Default: 1 (1AM in local server time)
+              -->
+              <reAggregationAgent type="Sitecore.ExperienceAnalytics.ReAggregation.Implementations.ReAggregationScheduler, Sitecore.ExperienceAnalytics.ReAggregation">
+                  <param ref="experienceAnalytics/reAggregation/services/aggregationSegmentRepository"/>
+                  <param desc="logger" ref="experienceAnalytics/reAggregation/logger"/>
+                  <param type="Sitecore.ExperienceAnalytics.ReAggregation.ReAggregationContainer, Sitecore.ExperienceAnalytics.ReAggregation" factoryMethod="GetLazyReAggregationManager"/>
+                  <param desc="triggerHourValidator" type="Sitecore.ExperienceAnalytics.ReAggregation.Implementations.TriggerHourValidator, Sitecore.ExperienceAnalytics.ReAggregation">
+                    <param desc="triggerHour">1</param>
+                  </param>
+              </reAggregationAgent>
+
+              <!-- When a re-aggregation task has completed the ReAggregationCompletionAgent updates the status of segments to 'Built' or 'Failed'-->
+              <reAggregationCompletionAgent type="Sitecore.ExperienceAnalytics.ReAggregation.Implementations.ReAggregationCompletionScheduler, Sitecore.ExperienceAnalytics.ReAggregation">
+                  <param ref="experienceAnalytics/reAggregation/services/aggregationSegmentRepository"/>
+                  <param desc="reAggregationCompletionManager" type="Sitecore.ExperienceAnalytics.ReAggregation.Implementations.ReAggregationCompletionManager, Sitecore.ExperienceAnalytics.ReAggregation" >
+                      <param desc="taskManager" ref="processing/taskManager" />
+                      <param ref="experienceAnalytics/reAggregation/services/aggregationSegmentRepository"/>
+                      <param desc="logger" ref="experienceAnalytics/reAggregation/logger" />
+                  </param>
+                <param desc="logger" ref="experienceAnalytics/reAggregation/logger"/>
+              </reAggregationCompletionAgent>
+
+          </reAggregation>
+      </experienceAnalytics>
+  </sitecore>
+</configuration>

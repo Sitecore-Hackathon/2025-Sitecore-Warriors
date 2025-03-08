@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+
+Purpose: This include file enables the batch link database  provider that replaces the standard data provider.
+The batch link database provider rebuilds the links database with batches: collects item links in memory and flush them with batches to database.
+The batch link database provider also perform links table cleanup before collecting and pushing new links to database.
+
+Please consult your Sitecore partner before enabling this include file.
+Enabling this file without taking into account the specifics of your solution can have unexpected consequences.
+
+To enable this include file, rename it to have a ".config" extension.
+
+-->
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/">
+    <sitecore>
+        <LinkDatabase type="Sitecore.Data.$(database).$(database)BatchLinkDatabase, Sitecore.Kernel" patch:instead="*[@type='Sitecore.Data.$(database).$(database)LinkDatabase, Sitecore.Kernel']">
+            <param connectionStringName="$(defaultLinkDatabaseConnectionStringName)">
+                <patch:delete />
+            </param>
+
+            <param type="Sitecore.Links.SqlLinksQueryFactory, Sitecore.Kernel" />
+            <param type="Sitecore.Links.SqlBatchLinksOperationWorker, Sitecore.Kernel" >
+                <param ref="dataApis/dataApi[@name='$(database)']" param1="$(defaultLinkDatabaseConnectionStringName)" />
+            </param>
+            <param ref="dataApis/dataApi[@name='$(database)']" param1="$(defaultLinkDatabaseConnectionStringName)" />
+        </LinkDatabase>
+    </sitecore>
+</configuration>

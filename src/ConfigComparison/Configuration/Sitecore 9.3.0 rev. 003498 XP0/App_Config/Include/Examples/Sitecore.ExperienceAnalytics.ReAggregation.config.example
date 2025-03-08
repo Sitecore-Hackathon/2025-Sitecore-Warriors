@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+
+Purpose: This file has features and components that are used to re-aggregate historical data when you create new reporting segment(s).
+
+-->
+<configuration xmlns:role="http://www.sitecore.net/xmlconfig/role/">
+  <sitecore role:require="Standalone or Processing">
+      <experienceAnalytics>
+          <reAggregation >
+              <logger type="Sitecore.ExperienceAnalytics.Core.Diagnostics.Logger, Sitecore.ExperienceAnalytics.Core" singleInstance="true"/>
+
+              <reAggregationManager type="Sitecore.ExperienceAnalytics.ReAggregation.Implementations.ReAggregationManager, Sitecore.ExperienceAnalytics.ReAggregation">
+                  <param desc="logger" ref="experienceAnalytics/reAggregation/logger"/>
+                  <param ref="experienceAnalytics/reAggregation/services/aggregationSegmentRepository"/>
+                  <param ref="processing/taskManager"/>
+                  <param ref="experienceAnalytics/reAggregation/worker"/>
+              </reAggregationManager>
+
+              <!-- The SegmentWorker processes batches of interactions 
+                     and passes them on to the SegmentBatchReAggregator for re-aggregation.
+                -->
+              <worker type="Sitecore.ExperienceAnalytics.ReAggregation.Implementations.SegmentWorker, Sitecore.ExperienceAnalytics.ReAggregation" >
+                  <param desc="logger" ref="experienceAnalytics/reAggregation/logger" />
+                  <param desc="reAggregator" ref="experienceAnalytics/reAggregation/aggregator" />
+              </worker>
+
+              <!-- The SegmentBatchReAggregator re-aggregates batches of interactions sent from the SegmentWorker 
+                     and stores them in the reporting database (RDB).
+                -->
+              <aggregator type="Sitecore.ExperienceAnalytics.ReAggregation.Implementations.SegmentBatchReAggregator, Sitecore.ExperienceAnalytics.ReAggregation">
+                  <param desc="logger" ref="experienceAnalytics/reAggregation/logger" />
+                  <param type="Sitecore.ExperienceAnalytics.Aggregation.Pipeline.SegmentProcessor">
+                      <param type="Sitecore.ExperienceAnalytics.Aggregation.Rules.RulesValidator, Sitecore.ExperienceAnalytics.Aggregation" />
+                      <param type="Sitecore.ExperienceAnalytics.Aggregation.FlexibleMetrics.Framework.Plumbing.FlexibleDimensionConfigReader, Sitecore.ExperienceAnalytics.Aggregation" />
+                      <param desc="logger" ref="experienceAnalytics/aggregation/logger"/>
+                  </param>
+                  <Context ref="aggregation/aggregationContexts/interaction/reAggregation" />
+                  <DateTimeStrategy ref="aggregation/dateTimePrecisionStrategy" />
+              </aggregator>
+
+              <services>
+                
+                <!-- AggregationSegmentRepository is responsible for reading/writing data from/to reference data store.-->
+                <aggregationSegmentRepository type="Sitecore.ExperienceAnalytics.Aggregation.Repositories.AggregationSegmentRepository, Sitecore.ExperienceAnalytics.Aggregation">
+                    <param type="Sitecore.ExperienceAnalytics.Core.Repositories.ReferenceData.ReferenceDataSegmentReader, Sitecore.ExperienceAnalytics.Core" />
+                    <param type="Sitecore.ExperienceAnalytics.Core.Repositories.ReferenceData.ReferenceDataSegmentStore, Sitecore.ExperienceAnalytics.Core" />
+                    <param desc="logger" ref="experienceAnalytics/aggregation/logger"/>
+                    <param type ="Sitecore.ExperienceAnalytics.Aggregation.ThreadLocker, Sitecore.ExperienceAnalytics.Aggregation">
+                    <param desc="logger" ref="experienceAnalytics/reAggregation/logger"/>
+                    <param type ="Sitecore.ExperienceAnalytics.Aggregation.Repositories.SqlHelper, Sitecore.ExperienceAnalytics.Aggregation">
+                        <param desc="connectionStringName">reporting</param>
+                    </param>
+                    </param>
+                </aggregationSegmentRepository>
+                
+              </services>
+          </reAggregation>
+      </experienceAnalytics>
+
+      <aggregation>
+          <aggregationContexts>
+              <interaction>
+
+                  <reAggregation type="Sitecore.ExperienceAnalytics.ReAggregation.Implementations.ReaggregationInteractionAggregatorContext">
+                      <ReportingTargets hint="list:AddReportingTarget">
+                          <primary ref="aggregation/reportingStorageProviders/primary" />
+                      </ReportingTargets>
+                  </reAggregation>
+
+              </interaction>
+          </aggregationContexts>
+      </aggregation>
+
+  </sitecore>
+</configuration>

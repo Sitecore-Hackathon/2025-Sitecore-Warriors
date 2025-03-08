@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+
+Purpose: This include file enables SSL offloading feature so that the system could take into account X-FORWARDED headers added by the load-balancer.
+
+Please consult your Sitecore partner before enabling this include file.
+Enabling this include file without taking into account the specifics of your solution can have unexpected consequences. 
+
+To enable this include file, rename it to have a ".config" extension.
+
+-->
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/" xmlns:role="http://www.sitecore.net/xmlconfig/role/">
+    <sitecore role:require="Standalone or ContentManagement or ContentDelivery">
+        <settings>
+            <!-- SITECORE LOADBALANCING ENABLED
+            Defines whether the SSL offloading feature is enabled
+            Default value: true
+            -->
+            <setting name="Sitecore.LoadBalancing.Enabled" value="true" />
+            <!-- SITECORE LOADBALANCING HOSTHEADER
+            Defines the value indicating from which request header the host should be taken during the SSL offloading
+            Default value: X-FORWARDED-HOST
+            -->
+            <setting name="Sitecore.LoadBalancing.HostHeader" value="X-FORWARDED-HOST" />
+            <!-- SITECORE LOADBALANCING SCHEMEHEADER
+            Defines the value indicating from which request header the scheme should be taken during the SSL offloading
+            Default value: X-FORWARDED-PROTO
+            -->
+            <setting name="Sitecore.LoadBalancing.SchemeHeader" value="X-FORWARDED-PROTO" />
+            <!-- SITECORE LOADBALANCING PORTHEADER
+            Defines the value indicating from which request header the port should be taken during the SSL offloading
+            Default value: X-FORWARDED-PORT
+            -->
+            <setting name="Sitecore.LoadBalancing.PortHeader" value="X-FORWARDED-PORT" />
+        </settings>
+    </sitecore>
+</configuration>

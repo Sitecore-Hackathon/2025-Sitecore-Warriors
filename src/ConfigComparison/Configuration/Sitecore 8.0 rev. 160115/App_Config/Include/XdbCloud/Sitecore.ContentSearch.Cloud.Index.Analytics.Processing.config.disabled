@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/">
+  <sitecore>
+    <contentSearch>
+      <configuration type="Sitecore.ContentSearch.ContentSearchConfiguration, Sitecore.ContentSearch">
+        <indexes hint="list:AddIndex">
+          <index type="Sitecore.Cloud.ContentSearch.CloudSearchProviderIndex, Sitecore.Cloud.ContentSearch">
+            <strategies hint="list:AddStrategy">
+              <timed type="Sitecore.ContentSearch.Analytics.TimedIndexRefreshStrategy, Sitecore.ContentSearch.Analytics">
+                <param desc="interval">00:01:00</param>
+              </timed>
+            </strategies>
+            <commitPolicyExecutor type="Sitecore.ContentSearch.CommitPolicyExecutor, Sitecore.ContentSearch">
+              <policies hint="list:AddCommitPolicy">
+                <policy type="Sitecore.ContentSearch.TimeIntervalCommitPolicy, Sitecore.ContentSearch" />
+              </policies>
+            </commitPolicyExecutor>
+            <locations hint="list:AddCrawler">
+              <crawler type="Sitecore.ContentSearch.Analytics.Crawlers.AnalyticsVisitCrawler, Sitecore.ContentSearch.Analytics">
+                <CrawlerName>Lucene Visit Crawler</CrawlerName>
+                <ObservableName>VisitAggregationObservable</ObservableName>
+                <NumberOfSecondsToQueue>60</NumberOfSecondsToQueue>
+                <MinimumQueueSize>500</MinimumQueueSize>
+                <MaximumQueueSize>50000</MaximumQueueSize>
+                <ThrottlingEnabled>True</ThrottlingEnabled>
+              </crawler>
+              <crawler type="Sitecore.ContentSearch.Analytics.Crawlers.AnalyticsVisitPageCrawler, Sitecore.ContentSearch.Analytics">
+                <CrawlerName>Lucene Visit Page Crawler</CrawlerName>
+                <ObservableName>VisitPageAggregationObservable</ObservableName>
+                <NumberOfSecondsToQueue>60</NumberOfSecondsToQueue>
+                <MinimumQueueSize>500</MinimumQueueSize>
+                <MaximumQueueSize>50000</MaximumQueueSize>
+                <ThrottlingEnabled>True</ThrottlingEnabled>
+              </crawler>
+              <crawler type="Sitecore.ContentSearch.Analytics.Crawlers.AnalyticsVisitPageEventCrawler, Sitecore.ContentSearch.Analytics">
+                <CrawlerName>Lucene Visit Page Event Crawler</CrawlerName>
+                <ObservableName>VisitPageEventAggregationObservable</ObservableName>
+                <NumberOfSecondsToQueue>60</NumberOfSecondsToQueue>
+                <MinimumQueueSize>500</MinimumQueueSize>
+                <MaximumQueueSize>50000</MaximumQueueSize>
+                <ThrottlingEnabled>True</ThrottlingEnabled>
+              </crawler>
+              <crawler type="Sitecore.ContentSearch.Analytics.Crawlers.AnalyticsContactCrawler, Sitecore.ContentSearch.Analytics">
+                <CrawlerName>Lucene Contact Crawler</CrawlerName>
+                <NumberOfSecondsToQueue>60</NumberOfSecondsToQueue>
+                <MinimumQueueSize>500</MinimumQueueSize>
+                <MaximumQueueSize>50000</MaximumQueueSize>
+                <ThrottlingEnabled>True</ThrottlingEnabled>
+                <observables hint="list:AddObservable">
+                  <observable>ContactAggregationObservable</observable>
+                  <observable>ContactChangeObservable</observable>
+                </observables>
+              </crawler>
+              <crawler type="Sitecore.ContentSearch.Analytics.Crawlers.AnalyticsContactTagCrawler, Sitecore.ContentSearch.Analytics">
+                <CrawlerName>Lucene Contact Tag Crawler</CrawlerName>
+                <NumberOfSecondsToQueue>60</NumberOfSecondsToQueue>
+                <MinimumQueueSize>500</MinimumQueueSize>
+                <MaximumQueueSize>50000</MaximumQueueSize>
+                <ThrottlingEnabled>True</ThrottlingEnabled>
+                <observables hint="list:AddObservable">
+                  <observable>ContactTagAggregationObservable</observable>
+                  <observable>ContactTagChangeObservable</observable>
+                </observables>
+              </crawler>
+              <crawler type="Sitecore.ContentSearch.Analytics.Crawlers.AnalyticsAddressCrawler, Sitecore.ContentSearch.Analytics">
+                <CrawlerName>Lucene Address Tag Crawler</CrawlerName>
+                <NumberOfSecondsToQueue>60</NumberOfSecondsToQueue>
+                <MinimumQueueSize>500</MinimumQueueSize>
+                <MaximumQueueSize>50000</MaximumQueueSize>
+                <ThrottlingEnabled>True</ThrottlingEnabled>
+                <observables hint="list:AddObservable">
+                  <observable>AddressAggregationObservable</observable>
+                  <observable>AddressChangeObservable</observable>
+                </observables>
+              </crawler>
+            </locations>
+          </index>
+        </indexes>
+      </configuration>
+    </contentSearch>
+  </sitecore>
+</configuration>

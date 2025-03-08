@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Purpose: This example file demonstrates how to enable Solr Cell as a media content extractor implementation.
+
+    Please find detailed description of the Solr Cell by the following link
+    https://lucene.apache.org/solr/guide/8_2/uploading-data-with-solr-cell-using-apache-tika.html
+    
+    To enable this include file, rename it to have a ".config" extension.
+-->
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/" xmlns:role="http://www.sitecore.net/xmlconfig/role/" xmlns:search="http://www.sitecore.net/xmlconfig/search/">
+  <sitecore role:require="Standalone or ContentManagement or ContentDelivery" search:require="solr">
+    <contentSearch>
+      <indexConfigurations>
+        <contentExtraction>
+          <mediaFileTextExtractor type="Sitecore.ContentSearch.SolrProvider.ContentExtraction.SolrCellMediaFileTextExtractor, Sitecore.ContentSearch.SolrProvider"
+                                  patch:instead="mediaFileTextExtractor">
+            <param hint="indexName">sitecore_web_index</param>
+            <param hint="fileOperations" type="Sitecore.ContentSearch.Abstractions.IO.FileBase, Sitecore.ContentSearch" resolve="true" />
+          </mediaFileTextExtractor>
+        </contentExtraction>
+      </indexConfigurations>
+    </contentSearch>
+  </sitecore>
+</configuration>

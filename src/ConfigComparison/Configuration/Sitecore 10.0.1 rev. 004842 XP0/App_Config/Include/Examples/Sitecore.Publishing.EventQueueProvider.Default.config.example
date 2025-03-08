@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+
+Purpose: This include file replaces the AsyncEventQueueProvider implementation with DefaultEventQueueProvider.
+The only difference between the two implementations is that the AsyncEventQueueProvider processes queued events from various databases asynchronously and
+DefaultEventQueueProvider process queued events sequentially.
+
+To enable this include file, rename it to have a ".config" extension.
+
+-->
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/">
+    <sitecore>
+        <services>
+            <register serviceType="Sitecore.Abstractions.BaseEventQueueProvider, Sitecore.Kernel" implementationType="Sitecore.Eventing.DefaultEventQueueProvider, Sitecore.Kernel" lifeTime="Singletone"/>
+        </services>
+    </sitecore>
+</configuration>

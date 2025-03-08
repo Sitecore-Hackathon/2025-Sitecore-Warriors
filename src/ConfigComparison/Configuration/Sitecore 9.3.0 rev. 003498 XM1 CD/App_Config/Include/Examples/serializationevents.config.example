@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <sitecore>
+    <events>
+      <event name="item:saved">
+        <handler type="Sitecore.Data.Serialization.ItemHandler, Sitecore.Kernel" method="OnItemSaved"/>
+      </event>
+      <event name="item:deleted">
+        <handler type="Sitecore.Data.Serialization.ItemHandler, Sitecore.Kernel" method="OnItemDeleted"/>
+      </event>
+      <event name="item:copied">
+        <handler type="Sitecore.Data.Serialization.ItemHandler, Sitecore.Kernel" method="OnItemCopied"/>
+      </event>
+      <event name="item:renamed">
+        <handler type="Sitecore.Data.Serialization.ItemHandler, Sitecore.Kernel" method="OnItemRenamed"/>
+      </event> 
+    </events>
+  </sitecore>
+</configuration>

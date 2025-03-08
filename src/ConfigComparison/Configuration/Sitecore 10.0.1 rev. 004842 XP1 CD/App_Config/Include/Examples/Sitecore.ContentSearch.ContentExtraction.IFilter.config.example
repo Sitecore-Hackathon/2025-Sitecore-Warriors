@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Purpose: This example file demonstrates how to enable IFilter as a media content extractor implementation.
+
+    To enable this include file, rename it to have a ".config" extension.
+-->
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/" xmlns:role="http://www.sitecore.net/xmlconfig/role/">
+  <sitecore role:require="Standalone or ContentManagement or ContentDelivery">
+    <contentSearch>
+      <indexConfigurations>
+        <contentExtraction>
+          <mediaFileTextExtractor type="Sitecore.ContentSearch.ContentExtraction.IFilter.IFilterMediaFileTextExtractor, Sitecore.ContentSearch.ContentExtraction"
+                                  patch:instead="mediaFileTextExtractor" />
+        </contentExtraction>
+      </indexConfigurations>
+    </contentSearch>
+  </sitecore>
+</configuration>

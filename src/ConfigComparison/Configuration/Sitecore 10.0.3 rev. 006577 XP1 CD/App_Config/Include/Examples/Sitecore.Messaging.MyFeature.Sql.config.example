@@ -1,0 +1,66 @@
+﻿<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/" xmlns:set="http://www.sitecore.net/xmlconfig/set/" xmlns:role="http://www.sitecore.net/xmlconfig/role/">
+    <sitecore role:require="ContentManagement or ContentDelivery or Standalone">
+        <TransientFaultHandling>
+            <Retryers>
+                <!--
+                    DefaultSqlPolicyRetryerFactory is based on an exponential back off strategy. The formula
+                    for which is (in MS Excel form):
+                        retry_delay_period =FLOOR(MIN(h + FLOOR(((2^i) - 1) * RANDBETWEEN(FLOOR(j*0.8,1), FLOOR(j*1.2,1)),1), k), 1)
+
+                    where
+                        h is minBackoff
+                        i is the index of the current retry
+                        j is deltaBackoff
+                        k is maxBackoff
+                -->
+                <Messaging.Example.Sql.LowTolerance>
+                    <Type>Sitecore.Framework.TransientFaultHandling.Sql.DefaultSqlPolicyRetryerFactory, Sitecore.Framework.TransientFaultHandling.Sql</Type>
+                    <Options>
+                        <ExponentialRetry>
+                            <MaxAttempts>2</MaxAttempts>
+                            <MinBackoff>00:00:05</MinBackoff>
+                            <MaxBackoff>00:00:10</MaxBackoff>
+                            <DeltaBackoff>00:00:01</DeltaBackoff>
+                        </ExponentialRetry>
+                    </Options>
+                </Messaging.Example.Sql.LowTolerance>
+
+            </Retryers>
+        </TransientFaultHandling>
+
+        <Messaging>
+            <Rebus>
+                <MyFeature.MessageBuses.Default>
+
+                    <Transport>
+                        <SqlServer>
+                            <ConnectionStringOrName>messaging</ConnectionStringOrName>
+                            <!-- Currently a table can host multiple queues -->
+                            <InputQueueName>MyFeature.MessageQueues.Default</InputQueueName>
+                            <!-- (optional) Specifies what retryer to use to account for transient errors - see TransientFaultHandling example config above. -->
+                            <RetryerName>Messaging.Example.Sql.LowTolerance</RetryerName>
+                        </SqlServer>
+                    </Transport>
+
+                    <!-- Define which messages will be sent to which queues.-->
+                    <Routing>
+                        <AssemblyMappings>
+                            <Default>
+                                <Assembly>Sitecore.MyFeature.Messaging.Model</Assembly>
+                                <DestinationQueue>MyFeature.MessageQueues.Default</DestinationQueue>
+                            </Default>
+                        </AssemblyMappings>
+                    </Routing>
+
+                    <Options>
+                        <!-- Configure any Rebus options here. -->
+                    </Options>
+
+                    <!-- Log messages from the Rebus engine will be sent to the Sitecore logs. -->
+                    <Logging Type="Sitecore.Messaging.SitecoreLoggerFactory,Sitecore.Messaging" />
+
+                </MyFeature.MessageBuses.Default>
+            </Rebus>
+        </Messaging>
+    </sitecore>
+</configuration>

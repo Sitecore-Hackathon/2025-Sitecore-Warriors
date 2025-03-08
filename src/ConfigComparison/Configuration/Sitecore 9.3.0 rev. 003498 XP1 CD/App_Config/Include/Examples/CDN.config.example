@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+Purpose: This include file enables the CDN support for Sitecore Media Library.
+
+To enable this, rename this file so that it has a ".config" extension and 
+change all the parameters to suit your own scenario
+
+-->
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/">
+    <sitecore>
+        <settings>
+            <!--  
+                  MediaResponse.AlwaysIncludeServerUrl must be true, to always include CDN url when getting media item url.
+                  Otherwise, the request will not be served by CDN server.
+            -->
+            <setting name="Media.AlwaysIncludeServerUrl">
+                <patch:attribute name="value">true</patch:attribute>
+            </setting>
+            <!--  
+                  MediaResponse.MediaLinkServerUrl must be set to url of the CDN endpoint.
+                  Change it from http://example.com, to the url of the CDN endpoint.
+            -->
+            <setting name="Media.MediaLinkServerUrl">
+                <patch:attribute name="value">http://example.com</patch:attribute>
+            </setting>
+            <!--  
+                  MediaResponse.AlwaysAppendRevision should be true to always append revision when getting media item url.
+                  The purpose of the value is to generate a unique URL for every revision.
+            -->            
+            <setting name="Media.AlwaysAppendRevision">
+                <patch:attribute name="value">true</patch:attribute>
+            </setting>
+            <!--  
+                  MediaResponse.Cacheability must be Public to let the CDN server cache the response.
+                  Otherwise instead of caching the response, the CDN server will ask for the response from Sitecore server every time. 
+            -->
+            <setting name="MediaResponse.Cacheability">
+                <patch:attribute name="value">Public</patch:attribute>
+            </setting>
+            <!--  
+                 The max-age to use in media response headers.
+                 CDN server uses this value as max-age of the response cache.
+            -->
+            <setting name="MediaResponse.MaxAge">
+                <patch:attribute name="value">7.00:00:00</patch:attribute>
+            </setting>
+        </settings>
+    </sitecore>
+</configuration>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Purpose: This example file demonstrates how to enable Apache Tika as a media content extractor implementation.
+
+    Please find detailed description of the Apache Tika by the following link https://tika.apache.org/
+    
+    To enable this include file, rename it to have a ".config" extension.
+-->
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/" xmlns:role="http://www.sitecore.net/xmlconfig/role/">
+  <sitecore role:require="Standalone or ContentManagement or ContentDelivery">
+    <contentSearch>
+      <indexConfigurations>
+        <contentExtraction>
+          <mediaFileTextExtractor type="Sitecore.ContentSearch.ContentExtraction.Tika.TikaMediaFileTextExtractor, Sitecore.ContentSearch.ContentExtraction"
+                                  patch:instead="mediaFileTextExtractor">
+            <param hint="client" type="Sitecore.ContentSearch.ContentExtraction.Tika.TikaHttpClient, Sitecore.ContentSearch.ContentExtraction">
+              <param hint="timeout">100000</param>
+            </param>
+            <param hint="fileOperations" type="Sitecore.ContentSearch.Abstractions.IO.FileBase, Sitecore.ContentSearch" resolve="true" />
+            <param hint="settings" type="Sitecore.Abstractions.BaseSettings, Sitecore.Kernel" resolve="true" />
+          </mediaFileTextExtractor>
+        </contentExtraction>
+      </indexConfigurations>
+    </contentSearch>
+  </sitecore>
+</configuration>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    This example file enables indexing of item base templates for Solr. This is useful behavior for inherited
+    template structures, such as those promoted by Sitecore Helix practices.
+    
+    Copy this file to your /App_Config/Include folder and rename to .config extension.
+    
+    The computed field accepts two configuration attributes:
+        deep: If false, will only index the item's template and its immediate base templates.
+        includeStandardTemplate: If true, will index the Sitecore Standard Template and its base templates as well.
+-->
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/" xmlns:role="http://www.sitecore.net/xmlconfig/role/" xmlns:search="http://www.sitecore.net/xmlconfig/search/">
+  <sitecore role:require="Standalone or ContentManagement or ContentDelivery" search:require="solr">
+    <contentSearch>
+      <indexConfigurations>
+        <defaultSolrIndexConfiguration>
+          <documentOptions ref="contentSearch/indexConfigurations/defaultSolrIndexConfiguration/documentOptions">
+            <fields hint="raw:AddComputedIndexField">
+              <field fieldName="_templates" returnType="string" type="Sitecore.ContentSearch.ComputedFields.AllTemplates, Sitecore.ContentSearch" deep="true" includeStandardTemplate="false" />
+            </fields>
+          </documentOptions>
+        </defaultSolrIndexConfiguration>
+      </indexConfigurations>
+    </contentSearch>
+  </sitecore>
+</configuration>

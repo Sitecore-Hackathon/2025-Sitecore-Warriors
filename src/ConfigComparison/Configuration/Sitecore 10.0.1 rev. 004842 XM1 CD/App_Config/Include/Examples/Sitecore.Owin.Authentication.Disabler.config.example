@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/" xmlns:role="http://www.sitecore.net/xmlconfig/role/" xmlns:set="http://www.sitecore.net/xmlconfig/set/">
+    <sitecore role:require="Standalone or ContentDelivery or ContentManagement">
+        <settings>
+            <setting name="Owin.Authentication.Enabled" value="false" />
+            <setting name="FederatedAuthentication.Enabled" value="false" />
+        </settings>
+
+        <sites>
+            <site name="shell" set:loginPage="/sitecore/login" />
+            <site name="admin" set:loginPage="/sitecore/admin/login.aspx" />
+        </sites>
+    </sitecore>
+</configuration>

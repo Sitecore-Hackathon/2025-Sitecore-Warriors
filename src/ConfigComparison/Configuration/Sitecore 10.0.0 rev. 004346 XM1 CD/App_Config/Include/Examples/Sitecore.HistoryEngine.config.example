@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+
+Purpose: This include file enables the History Engine for Sitecore databases.
+
+To enable this include file, rename it to have a ".config" extension.
+
+-->
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/">
+  <sitecore>
+    <pipelines>
+      <initializeManagers>
+        <processor type="Sitecore.Pipelines.InitializeManagers.InitializeHistoryManager, Sitecore.Kernel" patch:after="processor[@type='Sitecore.Pipelines.InitializeManagers.InitializeProxyManager, Sitecore.Kernel']" />
+      </initializeManagers>
+    </pipelines>
+    <databases>
+      <database id="core">
+        <Engines.HistoryEngine.Storage>
+          <obj type="Sitecore.Data.$(database).$(database)HistoryStorage, Sitecore.Kernel">
+            <param connectionStringName="$(id)">
+            </param>
+          </obj>
+        </Engines.HistoryEngine.Storage>
+      </database>
+      <database id="master">
+        <Engines.HistoryEngine.Storage>
+          <obj type="Sitecore.Data.$(database).$(database)HistoryStorage, Sitecore.Kernel">
+            <param connectionStringName="$(id)" />
+            <EntryLifeTime>30.00:00:00</EntryLifeTime>
+          </obj>
+        </Engines.HistoryEngine.Storage>
+        <Engines.HistoryEngine.SaveDotNetCallStack>false</Engines.HistoryEngine.SaveDotNetCallStack>
+      </database>
+    </databases>
+    <scheduling>
+      <!-- Agent to clean up history data -->
+      <agent type="Sitecore.Tasks.CleanupHistory" method="Run" interval="04:00:00" patch:after="agent[@type='Sitecore.Tasks.CompactClientDataAgent']" />
+    </scheduling>
+  </sitecore>
+</configuration>
