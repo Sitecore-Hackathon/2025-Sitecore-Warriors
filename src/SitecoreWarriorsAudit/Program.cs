@@ -15,66 +15,66 @@ namespace SitecoreWarriorsAudit
                 .AddJsonFile("appsettings.json")
                 .Build();
 
+
+            // Display the stylish banner
+            Console.WriteLine("****************************************");
+            Console.WriteLine("*                                      *");
+            Console.WriteLine("*          Sitecore Warriors           *");
+            Console.WriteLine("*                                      *");
+            Console.WriteLine("****************************************");
+
+            // Load the XML file using a relative path
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+            string xmlPath = Path.Combine(basePath, "ConfigComparison", "sitecore_folders.xml");
+            XDocument xmlDoc = XDocument.Load(xmlPath);
+
+            // Get available versions
+            var versions = xmlDoc.Descendants("Folder")
+                                 .Select(x => x.Element("Version").Value)
+                                 .Distinct()
+                                 .OrderBy(v => Version.Parse(v))
+                                 .ToList();
+
+            // Prompt for version
+            string version = GetValidUserInput("version", versions);
+
+            // Get available revisions for the selected version
+            var revisions = xmlDoc.Descendants("Folder")
+                                  .Where(x => x.Element("Version").Value == version)
+                                  .Select(x => x.Element("Revision").Value)
+                                  .Distinct()
+                                  .ToList();
+
+            // Prompt for revision
+            string revision = GetValidUserInput("revision", revisions);
+
+            // Get available types for the selected version and revision
+            var types = xmlDoc.Descendants("Folder")
+                              .Where(x => x.Element("Version").Value == version && x.Element("Revision").Value == revision)
+                              .Select(x => x.Element("Type").Value)
+                              .Distinct()
+                              .ToList();
+
+            // Prompt for type
+            string type = types.Contains("") ? "" : GetValidUserInput("type", types);
+
+            // Get available roles for the selected version, revision, and type
+            var roles = xmlDoc.Descendants("Folder")
+                              .Where(x => x.Element("Version").Value == version && x.Element("Revision").Value == revision && x.Element("Type").Value == type)
+                              .Select(x => x.Element("Role").Value)
+                              .Distinct()
+                              .ToList();
+
+            // Prompt for role
+            string role = roles.Contains("") ? "" : GetValidUserInput("role", roles);
+
+            // Get the folder name based on the selected options
+            var folderName = xmlDoc.Descendants("Folder")
+                                   .Where(x => x.Element("Version").Value == version && x.Element("Revision").Value == revision && x.Element("Type").Value == type && x.Element("Role").Value == role)
+                                   .Select(x => x.Element("FolderName").Value)
+                                   .FirstOrDefault();
             while (true)
             {
-                // Display the stylish banner
-                Console.WriteLine("****************************************");
-                Console.WriteLine("*                                      *");
-                Console.WriteLine("*          Sitecore Warriors           *");
-                Console.WriteLine("*                                      *");
-                Console.WriteLine("****************************************");
-
-                // Load the XML file using a relative path
-                string basePath = AppDomain.CurrentDomain.BaseDirectory;
-                string xmlPath = Path.Combine(basePath, "ConfigComparison", "sitecore_folders.xml");
-                XDocument xmlDoc = XDocument.Load(xmlPath);
-
-                // Get available versions
-                var versions = xmlDoc.Descendants("Folder")
-                                     .Select(x => x.Element("Version").Value)
-                                     .Distinct()
-                                     .OrderBy(v => Version.Parse(v))
-                                     .ToList();
-
-                // Prompt for version
-                string version = GetValidUserInput("version", versions);
-
-                // Get available revisions for the selected version
-                var revisions = xmlDoc.Descendants("Folder")
-                                      .Where(x => x.Element("Version").Value == version)
-                                      .Select(x => x.Element("Revision").Value)
-                                      .Distinct()
-                                      .ToList();
-
-                // Prompt for revision
-                string revision = GetValidUserInput("revision", revisions);
-
-                // Get available types for the selected version and revision
-                var types = xmlDoc.Descendants("Folder")
-                                  .Where(x => x.Element("Version").Value == version && x.Element("Revision").Value == revision)
-                                  .Select(x => x.Element("Type").Value)
-                                  .Distinct()
-                                  .ToList();
-
-                // Prompt for type
-                string type = types.Contains("") ? "" : GetValidUserInput("type", types);
-
-                // Get available roles for the selected version, revision, and type
-                var roles = xmlDoc.Descendants("Folder")
-                                  .Where(x => x.Element("Version").Value == version && x.Element("Revision").Value == revision && x.Element("Type").Value == type)
-                                  .Select(x => x.Element("Role").Value)
-                                  .Distinct()
-                                  .ToList();
-
-                // Prompt for role
-                string role = roles.Contains("") ? "" : GetValidUserInput("role", roles);
-
-                // Get the folder name based on the selected options
-                var folderName = xmlDoc.Descendants("Folder")
-                                       .Where(x => x.Element("Version").Value == version && x.Element("Revision").Value == revision && x.Element("Type").Value == type && x.Element("Role").Value == role)
-                                       .Select(x => x.Element("FolderName").Value)
-                                       .FirstOrDefault();
-
                 Console.WriteLine($"\nSelected Sitecore Version: {folderName}");
 
                 InsertSitecoreVersion(configuration, version, revision, type, role, folderName);
@@ -92,9 +92,11 @@ namespace SitecoreWarriorsAudit
                 Console.WriteLine("\nSelect an option:");
                 Console.WriteLine("1. Config Compare");
                 Console.WriteLine("2. Content Audit");
-                Console.WriteLine("3. Security Audit");
-                Console.WriteLine("4. Create Audit Report (HTML)");
-                Console.WriteLine("5. Exit\n");
+                Console.WriteLine("3. Layout Audit");
+                Console.WriteLine("4. Media Audit");
+                Console.WriteLine("5. Security Audit");
+                Console.WriteLine("6. Create Audit Report (HTML)");
+                Console.WriteLine("7. Exit\n");
 
                 Console.Write("Choose the option: ");
                 var option = Console.ReadLine();
@@ -108,12 +110,18 @@ namespace SitecoreWarriorsAudit
                         ContentAudit.Run();
                         break;
                     case "3":
-                        SecurityAudit.Run();
+                        LayoutAudit.Run();
                         break;
                     case "4":
-                        CreateAuditReport.Run();
+                        MediaAudit.Run();
                         break;
                     case "5":
+                        SecurityAudit.Run();
+                        break;
+                    case "6":
+                        CreateAuditReport.Run(configuration);
+                        break;
+                    case "7":
                         Console.WriteLine("Exiting the program. Goodbye!");
                         return;
                     default:

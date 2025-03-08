@@ -12,6 +12,7 @@
       <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.2" />
       <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.2" />
       <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.2" />
+      <PackageReference Include="PuppeteerSharp" Version="20.1.3" />
     </ItemGroup>
 
     <ItemGroup>       
@@ -19,6 +20,9 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
       <None Update="ConfigComparison\sitecore_folders.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="report-template.html">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>

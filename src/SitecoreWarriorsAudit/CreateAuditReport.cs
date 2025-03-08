@@ -1,13 +1,132 @@
 ﻿using System;
+using System.IO;
+using System.Data;
+using System.Data.SqlClient;
+using System.Threading.Tasks;
+using PuppeteerSharp;
+using System;
+using System.Xml.Linq;
+using System.Linq;
+using System.IO;
+using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Data.SqlClient;
 
 namespace SitecoreWarriorsAudit
 {
     public static class CreateAuditReport
     {
-        public static void Run()
+        public static async Task Run(IConfiguration configuration)
         {
             Console.WriteLine("Create Audit Report selected.");
-            // Implement create audit report logic here
+            string report = await GenerateReport(configuration);
+            Console.WriteLine(report);
+        }
+
+        private static async Task<string> GenerateReport(IConfiguration configuration)
+        {
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+            // Step 1: Query the SQL Table using Stored Procedure
+            var dataTables = GetDataFromStoredProcedure(connectionString);
+
+            // Step 2: Load the HTML Template
+            string htmlTemplate = File.ReadAllText("report-template.html");
+            string populatedHtml = PopulateHtmlTemplate(htmlTemplate, dataTables);
+
+            // Step 3: Generate HTML and PDF
+            string htmlOutputPath = "Sitecore_Audit.html";
+            string pdfOutputPath = "Sitecore_Audit.pdf";
+
+            File.WriteAllText(htmlOutputPath, populatedHtml);
+            await ConvertHtmlToPdf(populatedHtml, pdfOutputPath);
+
+            return "Report generated successfully!";
+        }
+
+        private static List<DataTable> GetDataFromStoredProcedure(string connectionString)
+        {
+            List<DataTable> dataTables = new List<DataTable>();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand("Usp_GenerateAuditReport", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        DataSet dataSet = new DataSet();
+                        adapter.Fill(dataSet);
+
+                        foreach (DataTable table in dataSet.Tables)
+                        {
+                            dataTables.Add(table);
+                        }
+                    }
+                }
+            }
+
+            return dataTables;
+        }
+
+        private static string PopulateHtmlTemplate(string template, List<DataTable> dataTables)
+        {
+            template = template.Replace("{Date}", $"{DateTime.Now.ToString("dddd, MMMM d, yyyy, h:mm tt")}");
+
+            foreach (var table in dataTables)
+            {
+                string tableName = table.TableName;
+                if (tableName == "SitecoreVersion")
+                {
+                    template = template.Replace("{SitecoreVersion}", table.Rows[0]["Sitecore"].ToString());
+                }
+                else
+                {
+                    string token = $"{{{{{tableName}}}}}";
+                    string tableHtml = ConvertDataTableToHtml(table);
+                    template = template.Replace(token, tableHtml);
+                }
+            }
+            return template;
+        }
+
+        private static string ConvertDataTableToHtml(DataTable table)
+        {
+            StringWriter sw = new StringWriter();
+            sw.WriteLine("<table border='0' cellspacing='0' cellpadding='0' summary='Header layout table' width='100%'>");
+
+            // Write the header row
+            sw.WriteLine("<tr>");
+            foreach (DataColumn column in table.Columns)
+            {
+                sw.WriteLine($"<th>{column.ColumnName}</th>");
+            }
+            sw.WriteLine("</tr>");
+
+            // Write the data rows
+            foreach (DataRow row in table.Rows)
+            {
+                sw.WriteLine("<tr>");
+                foreach (DataColumn column in table.Columns)
+                {
+                    sw.WriteLine($"<td>{row[column]}</td>");
+                }
+                sw.WriteLine("</tr>");
+            }
+
+            sw.WriteLine("</table>");
+            return sw.ToString();
+        }
+
+
+        private static async Task ConvertHtmlToPdf(string htmlContent, string outputPath)
+        {
+            await new BrowserFetcher().DownloadAsync();
+            using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
+            var page = await browser.NewPageAsync();
+            await page.SetContentAsync(htmlContent);
+            await page.PdfAsync(outputPath);
         }
     }
 }
