@@ -14,25 +14,39 @@ Many Sitecore clients are using outdated versions of Sitecore and are unsure whe
 ⟹ Replace this Video link
 
 ## Pre-requisites and Dependencies
-- Latest Sitecore PowerShell version installed
+- Sitecore PowerShell version 7 installed
 - On-prem Sitecore installation
 - Access to the `App_Config` folder of the Sitecore application
 - A SQL Server to host the audit report database
+- .NET 8.0 SDK installed
 
 ## Installation instructions
-1. Install the package containing Sitecore items.
-2. Create the new audit database using the provided schema.
+1. Install the package ([Sitecore Warriors 2025.zip](https://github.com/Sitecore-Hackathon/2025-Sitecore-Warriors/tree/main/Package)) containing Sitecore items and a handler.
+2. Create the new audit database using the provided [schema](https://github.com/Sitecore-Hackathon/2025-Sitecore-Warriors/tree/main/DB%20Schema) and get the connection string to be used in the next step.
 
 ### Configuration
-- Add the connection string in the Sitecore connection string file and name it `Audit`.
+- Add the connection string in the Sitecore connection string config and name it `audit`.
 - Update the connection string in `appsettings.json` located in `\src\SitecoreWarriorsAudit\dist\`.
 
 ## Usage instructions
 Navigate to `\src\SitecoreWarriorsAudit\dist\` and run `SitecoreWarriorsAudit.exe`. You can choose from the following options:
-1. Config Compare
-2. Content Audit
-3. Security Audit
-4. Create Audit Report (HTML)
-5. Exit
 
-For Config Compare, select the Sitecore version, revision number, type, and role if applicable. Then provide the path to the current Sitecore `App_Config` folder. For Content Audit, the tool will generate a report from Sitecore and push it to the database. Similarly, for Security Audit. Finally, execute Create Audit Report to generate an HTML report, which will be saved in the `src\SitecoreWarriorsAudit\dist` folder.
+1. Config Compare
+	- This compares the vanilla Sitecore app_config with the provided local Sitecore app_config folder. 
+2. Content Audit
+	- This gets the Content report from Sitecore. 
+3. Layout Audit
+	- This gets the Layout report from Sitecore. 
+4. Media Audit
+	- This gets the Media report from Sitecore. 
+5. Security Audit
+	- This gets the Security report from Sitecore. 
+6. Create Audit Report (HTML)
+	- After everything is completed, this option will create a report as HTML and PDF.  It can be found in `\src\SitecoreWarriorsAudit\dist\` 
+7. Exit
+
+Recommendation is to run all the various audits and then create the Audit report. 
+### Things which we can improve
+1. Reduce the overall repository by compressing the files.
+2. Creating additional report by querying data
+3. Creating a fancy report
