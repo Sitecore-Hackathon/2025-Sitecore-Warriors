@@ -13,5 +13,6 @@ namespace SitecoreWarriorsAudit
         public string Type { get; set; }
         public string Role { get; set; }
         public string Sitecore { get; set; }
+        public string SitecoreCmUrl { get; set; }
     }
 }

@@ -73,6 +73,28 @@ namespace SitecoreWarriorsAudit
                                    .Where(x => x.Element("Version").Value == version && x.Element("Revision").Value == revision && x.Element("Type").Value == type && x.Element("Role").Value == role)
                                    .Select(x => x.Element("FolderName").Value)
                                    .FirstOrDefault();
+
+            string sitecoreCMUrl;
+            do
+            {
+                Console.Write("Please enter the Sitecore CM Url (e.g., https://sc104cm.dev.local): ");
+                sitecoreCMUrl = Console.ReadLine();
+
+                // Validate and extract the base URL
+                if (Uri.TryCreate(sitecoreCMUrl, UriKind.Absolute, out Uri uriResult) &&
+                    (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps) &&
+                    string.IsNullOrEmpty(uriResult.AbsolutePath.Trim('/')))
+                {
+                    Console.WriteLine("Valid URL entered.");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid URL. Please enter a valid http or https URL without any path.");
+                }
+            } while (true);
+
+
             while (true)
             {
                 Console.WriteLine($"\nSelected Sitecore Version: {folderName}");
@@ -86,7 +108,8 @@ namespace SitecoreWarriorsAudit
                     Revision = revision,
                     Type = type,
                     Role = role,
-                    Sitecore = folderName
+                    Sitecore = folderName,
+                    SitecoreCmUrl = sitecoreCMUrl
                 };
 
                 Console.WriteLine("\nSelect an option:");
@@ -107,16 +130,16 @@ namespace SitecoreWarriorsAudit
                         ConfigCompare.Run(configuration, sitecoreVersion);
                         break;
                     case "2":
-                        ContentAudit.Run();
+                        ContentAudit.Run(configuration, sitecoreVersion);
                         break;
                     case "3":
-                        LayoutAudit.Run();
+                        LayoutAudit.Run(configuration, sitecoreVersion);
                         break;
                     case "4":
-                        MediaAudit.Run();
+                        MediaAudit.Run(configuration, sitecoreVersion);
                         break;
                     case "5":
-                        SecurityAudit.Run();
+                        SecurityAudit.Run(configuration, sitecoreVersion);
                         break;
                     case "6":
                         CreateAuditReport.Run(configuration);
