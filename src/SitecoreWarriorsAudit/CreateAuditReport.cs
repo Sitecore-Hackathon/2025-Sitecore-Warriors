@@ -11,6 +11,7 @@ using System.IO;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Data.SqlClient;
+using System.Text;
 
 namespace SitecoreWarriorsAudit
 {
@@ -73,7 +74,8 @@ namespace SitecoreWarriorsAudit
         private static string PopulateHtmlTemplate(string template, List<DataTable> dataTables)
         {
             template = template.Replace("{Date}", $"{DateTime.Now.ToString("dddd, MMMM d, yyyy, h:mm tt")}");
-
+            StringBuilder stringBuilder = new StringBuilder();
+            string token = "{Tables}";
             foreach (var table in dataTables)
             {
                 string tableName = table.TableName;
@@ -81,19 +83,26 @@ namespace SitecoreWarriorsAudit
                 {
                     template = template.Replace("{SitecoreVersion}", table.Rows[0]["Sitecore"].ToString());
                 }
-                else
+                else if (tableName != "SitecoreVersion")
                 {
-                    string token = $"{{{{{tableName}}}}}";
-                    string tableHtml = ConvertDataTableToHtml(table);
-                    template = template.Replace(token, tableHtml);
+                    stringBuilder.Append(ConvertDataTableToHtml(table));
                 }
             }
+
+            template = template.Replace(token, stringBuilder.ToString());
+
             return template;
         }
 
         private static string ConvertDataTableToHtml(DataTable table)
         {
             StringWriter sw = new StringWriter();
+
+            sw.WriteLine("\n\n");
+            sw.WriteLine($"<h2>{table.TableName}</h2>");
+            sw.WriteLine("\n\n");
+
+
             sw.WriteLine("<table border='0' cellspacing='0' cellpadding='0' summary='Header layout table' width='100%'>");
 
             // Write the header row
@@ -116,6 +125,8 @@ namespace SitecoreWarriorsAudit
             }
 
             sw.WriteLine("</table>");
+
+            sw.WriteLine("\n\n");
             return sw.ToString();
         }
 
