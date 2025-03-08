@@ -11,7 +11,7 @@ Community Module
 Many Sitecore clients are using outdated versions of Sitecore and are unsure whether to upgrade. Stakeholders often lack visibility into their current environment, including the amount of content, media items, and any unintended changes to configuration files. This tool helps them make informed decisions by auditing their system and providing detailed reports.
 
 ## Video link
-⟹ Replace this Video link
+[Watch the demo](https://youtu.be/Tq-LXRU8_T4)
 
 ## Pre-requisites and Dependencies
 - Sitecore PowerShell version 7 installed

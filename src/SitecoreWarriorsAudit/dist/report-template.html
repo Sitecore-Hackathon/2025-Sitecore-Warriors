@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Sitecore Audit Report</title>
+    <style>
+        table, th, td {
+            border: 1px solid;
+        }
+    </style>
+</head>
+<body>
+    <table border="0"
+           cellspacing="0"
+           cellpadding="0"
+           summary="Header layout table"
+           width="100%">
+        <tbody>
+            <tr>
+                <td width="769" colspan="7" valign="bottom">
+                    <p>
+                        Sitecore Warriors - <a href="https://github.com/Sitecore-Hackathon/2025-Sitecore-Warriors">View GitHub!</a>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td width="769" colspan="7" valign="bottom">
+                    <h1>
+                        Sitecore Audit Report
+                    </h1>
+                </td>
+            </tr>
+            <tr>
+                <td width="769" colspan="7" valign="top">
+                </td>
+            </tr>
+            <tr>
+                <td width="209" colspan="2">
+                    <h2>
+                        Audit Date
+                    </h2>
+                </td>
+                <td width="279">
+                    <h2>
+                        Sitecore Version
+                    </h2>
+                </td>
+                <td width="280" colspan="3">
+                    <h2>
+                        Prepared By
+                    </h2>
+                </td>
+            </tr>
+            <tr>
+                <td width="209" colspan="2" valign="top">
+                    <p>
+                        {Date}
+                    </p>
+                </td>
+                <td width="279" valign="top">
+                    <p>
+                        {SitecoreVersion}
+                    </p>
+                </td>
+                <td width="280" colspan="3" valign="top">
+                    <p>
+                        Sitecore Warriors
+                    </p>
+                </td>
+            </tr>            
+        </tbody>
+    </table>
+    <p>
+        For a comprehensive analysis, please refer to the detailed report below.
+    </p>
+    {Tables}
+    <p>
+        In summary, the Sitecore audit has provided valuable insights into our content, media, configuration changes, and usage patterns.
+    </p>
+</body>
+</html>
