@@ -1,0 +1,468 @@
+<SitecoreFolders>
+  <Folder>
+    <FolderName>Sitecore 10.0.0 rev. 004346 XM1 CD</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>10.0.0</Version>
+    <Revision>004346</Revision>
+    <Type>XM1</Type>
+    <Role>CD</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 10.0.0 rev. 004346 XM1 CM</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>10.0.0</Version>
+    <Revision>004346</Revision>
+    <Type>XM1</Type>
+    <Role>CM</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 10.0.0 rev. 004346 XP0</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>10.0.0</Version>
+    <Revision>004346</Revision>
+    <Type>XP0</Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 10.0.0 rev. 004346 XP1 CD</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>10.0.0</Version>
+    <Revision>004346</Revision>
+    <Type>XP1</Type>
+    <Role>CD</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 10.0.0 rev. 004346 XP1 CM</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>10.0.0</Version>
+    <Revision>004346</Revision>
+    <Type>XP1</Type>
+    <Role>CM</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 10.0.1 rev. 004842 XM1 CD</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>10.0.1</Version>
+    <Revision>004842</Revision>
+    <Type>XM1</Type>
+    <Role>CD</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 10.0.1 rev. 004842 XM1 CM</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>10.0.1</Version>
+    <Revision>004842</Revision>
+    <Type>XM1</Type>
+    <Role>CM</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 10.0.1 rev. 004842 XP0</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>10.0.1</Version>
+    <Revision>004842</Revision>
+    <Type>XP0</Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 10.0.1 rev. 004842 XP1 CD</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>10.0.1</Version>
+    <Revision>004842</Revision>
+    <Type>XP1</Type>
+    <Role>CD</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 10.0.1 rev. 004842 XP1 CM</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>10.0.1</Version>
+    <Revision>004842</Revision>
+    <Type>XP1</Type>
+    <Role>CM</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 10.0.2 rev. 006052 XM1 CD</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>10.0.2</Version>
+    <Revision>006052</Revision>
+    <Type>XM1</Type>
+    <Role>CD</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 10.0.2 rev. 006052 XM1 CM</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>10.0.2</Version>
+    <Revision>006052</Revision>
+    <Type>XM1</Type>
+    <Role>CM</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 10.0.2 rev. 006052 XP0</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>10.0.2</Version>
+    <Revision>006052</Revision>
+    <Type>XP0</Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 10.0.2 rev. 006052 XP1 CD</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>10.0.2</Version>
+    <Revision>006052</Revision>
+    <Type>XP1</Type>
+    <Role>CD</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 10.0.2 rev. 006052 XP1 CM</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>10.0.2</Version>
+    <Revision>006052</Revision>
+    <Type>XP1</Type>
+    <Role>CM</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 10.0.3 rev. 006577 XM1 CD</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>10.0.3</Version>
+    <Revision>006577</Revision>
+    <Type>XM1</Type>
+    <Role>CD</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 10.0.3 rev. 006577 XM1 CM</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>10.0.3</Version>
+    <Revision>006577</Revision>
+    <Type>XM1</Type>
+    <Role>CM</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 10.0.3 rev. 006577 XP0</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>10.0.3</Version>
+    <Revision>006577</Revision>
+    <Type>XP0</Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 10.0.3 rev. 006577 XP1 CD</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>10.0.3</Version>
+    <Revision>006577</Revision>
+    <Type>XP1</Type>
+    <Role>CD</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 10.0.3 rev. 006577 XP1 CM</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>10.0.3</Version>
+    <Revision>006577</Revision>
+    <Type>XP1</Type>
+    <Role>CM</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 8.0 rev. 141212</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>8.0</Version>
+    <Revision>141212</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 8.0 rev. 150121</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>8.0</Version>
+    <Revision>150121</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 8.0 rev. 150223</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>8.0</Version>
+    <Revision>150223</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 8.0 rev. 151127</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>8.0</Version>
+    <Revision>151127</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 8.0 rev. 160115</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>8.0</Version>
+    <Revision>160115</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 8.1 rev. 151003</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>8.1</Version>
+    <Revision>151003</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 8.1 rev. 151207</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>8.1</Version>
+    <Revision>151207</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 8.1 rev. 160302</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>8.1</Version>
+    <Revision>160302</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 8.1 rev. 160519</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>8.1</Version>
+    <Revision>160519</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 8.2 rev. 160729</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>8.2</Version>
+    <Revision>160729</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 8.2 rev. 161115</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>8.2</Version>
+    <Revision>161115</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 8.2 rev. 161221</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>8.2</Version>
+    <Revision>161221</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 8.2 rev. 170407</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>8.2</Version>
+    <Revision>170407</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 8.2 rev. 170614</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>8.2</Version>
+    <Revision>170614</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 8.2 rev. 170728</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>8.2</Version>
+    <Revision>170728</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 8.2 rev. 171121</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>8.2</Version>
+    <Revision>171121</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 8.2 rev. 180406</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>8.2</Version>
+    <Revision>180406</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 9.0.0 rev. 171002</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>9.0.0</Version>
+    <Revision>171002</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 9.0.1 rev. 171219</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>9.0.1</Version>
+    <Revision>171219</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 9.0.2 rev. 180604</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>9.0.2</Version>
+    <Revision>180604</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 9.1.0 rev. 001564</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>9.1.0</Version>
+    <Revision>001564</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 9.1.1 rev. 002459</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>9.1.1</Version>
+    <Revision>002459</Revision>
+    <Type>
+    </Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 9.2.0 rev. 002893 XM1 CD</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>9.2.0</Version>
+    <Revision>002893</Revision>
+    <Type>XM1</Type>
+    <Role>CD</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 9.2.0 rev. 002893 XM1 CM</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>9.2.0</Version>
+    <Revision>002893</Revision>
+    <Type>XM1</Type>
+    <Role>CM</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 9.2.0 rev. 002893 XP0</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>9.2.0</Version>
+    <Revision>002893</Revision>
+    <Type>XP0</Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 9.2.0 rev. 002893 XP1 CD</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>9.2.0</Version>
+    <Revision>002893</Revision>
+    <Type>XP1</Type>
+    <Role>CD</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 9.2.0 rev. 002893 XP1 CM</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>9.2.0</Version>
+    <Revision>002893</Revision>
+    <Type>XP1</Type>
+    <Role>CM</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 9.3.0 rev. 003498 XM1 CD</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>9.3.0</Version>
+    <Revision>003498</Revision>
+    <Type>XM1</Type>
+    <Role>CD</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 9.3.0 rev. 003498 XM1 CM</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>9.3.0</Version>
+    <Revision>003498</Revision>
+    <Type>XM1</Type>
+    <Role>CM</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 9.3.0 rev. 003498 XP0</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>9.3.0</Version>
+    <Revision>003498</Revision>
+    <Type>XP0</Type>
+    <Role>
+    </Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 9.3.0 rev. 003498 XP1 CD</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>9.3.0</Version>
+    <Revision>003498</Revision>
+    <Type>XP1</Type>
+    <Role>CD</Role>
+  </Folder>
+  <Folder>
+    <FolderName>Sitecore 9.3.0 rev. 003498 XP1 CM</FolderName>
+    <Sitecore>Sitecore</Sitecore>
+    <Version>9.3.0</Version>
+    <Revision>003498</Revision>
+    <Type>XP1</Type>
+    <Role>CM</Role>
+  </Folder>
+</SitecoreFolders>
