@@ -118,7 +118,7 @@ namespace SitecoreWarriorsAudit
                 Console.WriteLine("3. Layout Audit");
                 Console.WriteLine("4. Media Audit");
                 Console.WriteLine("5. Security Audit");
-                Console.WriteLine("6. Create Audit Report (HTML)");
+                Console.WriteLine("6. Create Audit Report (PDF)");
                 Console.WriteLine("7. Exit\n");
 
                 Console.Write("Choose the option: ");
