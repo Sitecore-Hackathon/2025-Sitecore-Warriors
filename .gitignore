@@ -96,3 +96,6 @@ bld/
 msbuild.log
 msbuild.err
 msbuild.wrn
+# Ignore all App_Config folders under 
+dist/ConfigComparison/Configuration/*/App_Config
+dist/ConfigComparison/Configuration/*/App_Config/
