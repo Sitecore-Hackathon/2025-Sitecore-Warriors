@@ -5,6 +5,7 @@ using System.IO;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Data.SqlClient;
+using System.IO.Compression;
 
 namespace SitecoreWarriorsAudit
 {
@@ -35,8 +36,20 @@ namespace SitecoreWarriorsAudit
 
             // Find the folder in \ConfigComparison\Configuration
             string configFolderPath = $"{basePath}ConfigComparison\\Configuration\\{folderName}\\App_Config";
+            string zipFilePath = $"{basePath}ConfigComparison\\Configuration\\{folderName}\\app_config.zip";
 
-            // Check if the folder exists
+            // Check if the zip file exists
+            if (File.Exists(zipFilePath))
+            {
+                // Uncompress the zip file
+                ZipFile.ExtractToDirectory(zipFilePath, $"{basePath}ConfigComparison\\Configuration\\{folderName}");
+            }
+            else
+            {
+                Console.WriteLine("The specified Sitecore Vanilla App_Config folder does not exist.");
+            }
+
+            // Check if the folder exists after uncompressing
             if (!Directory.Exists(configFolderPath))
             {
                 Console.WriteLine("The specified Sitecore Vanilla App_Config folder does not exist.");

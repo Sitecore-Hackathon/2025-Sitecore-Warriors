@@ -18,6 +18,9 @@
     <ItemGroup>       
       <None Update="appsettings.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>       
+      <None Update="ConfigComparison\Configuration\**\app_config.zip">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
       <None Update="ConfigComparison\sitecore_folders.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
